@@ -10,7 +10,7 @@ namespace AutoInstaller
     {
         // Class variables
         List<ApplicationFactory> m_software;
-        Download download;
+        Download m_download;
 
         public ApplicationForm()
         {
@@ -51,7 +51,7 @@ namespace AutoInstaller
                     // if currently downloading - stop download and delete
                     catch
                     {
-                        download.CancelDownload();
+                        m_download.CancelDownload();
 
                         // wait cancel to complete
                         Thread.Sleep(50);
@@ -73,8 +73,8 @@ namespace AutoInstaller
             buttonBegin.Enabled = false;
 
             // Start download queue
-            download = new Download(m_software, listViewStatus);
-            download.StartDownloadQueue();
+            m_download = new Download(m_software, listViewStatus);
+            m_download.StartDownloadQueue();
         }
 
         /// <summary>
