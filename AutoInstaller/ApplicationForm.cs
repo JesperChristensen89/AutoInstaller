@@ -39,27 +39,34 @@ namespace AutoInstaller
             // Do only if softwarelist has been generated
             if (m_software!=null)
             {
-                foreach (var application in m_software)
+
+                // Ask user if the wants to delete install files
+                DialogResult deleteFiles = MessageBox.Show("Do you want to delete install files?", "Auto Installer", MessageBoxButtons.YesNo);
+
+                if (deleteFiles == DialogResult.Yes)
                 {
-                    var fileName = application.Name + ".exe";
-
                     // delete install file
-                    try
+                    foreach (var application in m_software)
                     {
-                        File.Delete(fileName);
-                    }
-                    // if currently downloading - stop download and delete
-                    catch
-                    {
-                        m_download.CancelDownload();
+                        var fileName = application.Name + ".exe";
 
-                        // wait cancel to complete
-                        Thread.Sleep(50);
-                        File.Delete(fileName);
+                        try
+                        {
+                            File.Delete(fileName);
+                        }
+                        // if currently downloading - stop download and delete
+                        catch
+                        {
+                            m_download.CancelDownload();
+
+                            // wait cancel to complete
+                            Thread.Sleep(50);
+                            File.Delete(fileName);
+                        }
                     }
                 }
             }
-            
+            // exit
         }
 
         /// <summary>
