@@ -41,7 +41,8 @@ namespace AutoInstaller
             {
 
                 // Ask user if the wants to delete install files
-                DialogResult deleteFiles = MessageBox.Show("Do you want to delete install files?", "Auto Installer", MessageBoxButtons.YesNo);
+                DialogResult deleteFiles = MessageBox.Show("Do you want to delete install files?", "Auto Installer",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (deleteFiles == DialogResult.Yes)
                 {
